@@ -15,8 +15,10 @@ export class TextBoxPage {
     this.page = page;
     this.nameInput = page.getByRole('textbox', { name: 'Full Name' });
     this.emailInput = page.getByRole('textbox', { name: 'name@example.com' })
+
+    this.permanentAddressInput = page.locator('#permanentAddress-wrapper #permanentAddress')
+    
     this.currentAddressInput = page.getByRole('textbox', { name: 'Current Address' })
-    this.permanentAddressInput = page.locator('#permanentAddress');
     this.submitButton = page.getByRole('button', { name: 'Submit' });
     this.outputName = page.locator('#name');
     this.outputEmail = page.locator('#email');
@@ -49,5 +51,23 @@ export class TextBoxPage {
 
   async expectEmailError() {
     await expect(this.emailInput).toHaveClass(/field-error/);
+  }
+
+  async emailShouldNotBeVisible() {
+    await expect(this.outputEmail).not.toBeVisible();
+  }
+
+  async submitValidForm(data:{
+    name: string;
+    email: string;
+    currentAddress: string;
+    permanentAddress: string;
+  }) {
+        await this.fillForm(data);
+        await this.submit();
+        await this.expectSuccess({
+            name: data.name,
+            email: data.email
+        });
   }
 }

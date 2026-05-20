@@ -90,5 +90,10 @@ test.describe('Text Box - POM + components style', () => {
         await test.step('Verify highlighted invalid email', async () => {
             await textBox.expectEmailError();
         });
+
+        ///fild of output data should be empty after submit form with invalid email
+        // await test.step('Verify output data should be empty', async () => {
+        //     await textBox.emailShouldNotBeVisible();
+        // });
     });
 }); 
