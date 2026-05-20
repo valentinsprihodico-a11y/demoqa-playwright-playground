@@ -17,7 +17,7 @@ test.describe('Text Box - POM + components style', () => {
         await sidebar.openTextBox();
         await test.step('Fill text box form', async () => {
             await textBox.fillForm({
-                name: 'John Doe',
+                name: 'John Doe junior',
                 email: 'john@example.com',
                 currentAddress: 'Current',
                 permanentAddress: 'Permanent',
