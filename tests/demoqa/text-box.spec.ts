@@ -35,4 +35,60 @@ test.describe('Text Box - POM + components style', () => {
             });
         });
     });
+
+    test('Highlight invalid email', async ({ page }) => {
+        const textBox = new TextBoxPage(page);
+        const sidebar = new Sidebar(page); 
+
+        await sidebar.openTextBox();
+        await test.step('Fill text box form', async () => {
+            await textBox.fillForm({
+                name: 'John Doe junior',
+                email: 'johnexample.com',
+                currentAddress: 'Current',
+                permanentAddress: 'Permanent',
+            });
+        });
+
+        await test.step('Submit form', async () => {
+            await textBox.submit();
+        });
+
+        await test.step('Verify highlighted invalid email', async () => {
+            await textBox.expectEmailError();
+            await textBox.emailShouldNotBeVisible();
+        });  
+    });
+
+    test('Secont fill data', async ({ page }) => {
+        const textBox = new TextBoxPage(page);
+        const sidebar = new Sidebar(page); 
+
+        await sidebar.openTextBox();
+        await test.step('first fill correct data', async () => {
+            await textBox.submitValidForm({   
+                name: 'John Doe junior',
+                email: 'sdfsf@sdfsf.com',
+                currentAddress: 'Current',
+                permanentAddress: 'Permanent',
+            });
+        });
+
+        await test.step('second fill incorrect email', async () => {
+            await textBox.fillForm({
+                name: 'John Doe junior',
+                email: 'johnexample.com',
+                currentAddress: 'Current',
+                permanentAddress: 'Permanent',
+            });
+        });
+
+        await test.step('Submit form', async () => {
+            await textBox.submit();
+        });
+
+        await test.step('Verify highlighted invalid email', async () => {
+            await textBox.expectEmailError();
+        });
+    });
 }); 
