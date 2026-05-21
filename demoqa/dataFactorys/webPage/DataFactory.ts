@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
-import type { User } from '../../pages/WebTablePage';
+//import type { User } from '../../pages/WebTablePage';
+import type { User } from '../../models/User';
 
 export function createUser(overrides = {}): User {
   return {

@@ -1,13 +1,14 @@
 import { Page, Locator, expect } from '@playwright/test';
+import type { User } from '../models/User';
 
-export type User = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  age: string;
-  salary: string;
-  department: string;
-};
+// export type User = {
+//   firstName: string;
+//   lastName: string;
+//   email: string;
+//   age: string;
+//   salary: string;
+//   department: string;
+// };
 
 export class WebTablesPage {
   readonly page: Page;
@@ -20,6 +21,8 @@ export class WebTablesPage {
   readonly prevButton: Locator;
   readonly rowsSelect: Locator;
 
+  //readonly firsNameInput: Locator;
+
   constructor(page: Page) {
     this.page = page;
 
@@ -30,6 +33,9 @@ export class WebTablesPage {
     this.prevButton = page.locator('.-previous .-btn');
 
     this.rowsSelect = page.locator('select[aria-label="rows per page"]');
+    //this.firsNameInput = page.locator('#firstName');
+
+    //this.firsNameInput = page.getByRole('cell', { name: 'John', exact: true });
   }
 
   // ===== NAVIGATION =====
@@ -51,11 +57,13 @@ export class WebTablesPage {
   // ===== TABLE ROW HELPERS =====
   getRow(text: string) {
     return this.page.locator('.rt-tr-group', { hasText: text });
+    //return this.page.locator(this.firsNameInput, { hasText: text });
+ 
   }
 
-  async expectRowVisible(text: string) {
-    await expect(this.getRow(text)).toBeVisible();
-  }
+  // async expectRowVisible(text: string) {
+  //   await expect(this.getRow(text)).toBeVisible();
+  // }
 
   // ===== ACTIONS =====
   async deleteUser(text: string) {
