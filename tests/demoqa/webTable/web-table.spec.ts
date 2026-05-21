@@ -19,6 +19,4 @@ test('create a same user', async ({ page }) => {
     await webTables.open(); 
     await webTables.addUsers(users);
     //await webTables.expectUsersExist(users);
-
-    //await webTables.expectUsersExist(users);
 });
