@@ -11,6 +11,8 @@ export class WebTablesPage {
   readonly nextButton: Locator;
   readonly prevButton: Locator;
   readonly rowsSelect: Locator;
+  //
+  readonly table: Locator;
 
   //readonly firsNameInput: Locator;
 
@@ -24,6 +26,8 @@ export class WebTablesPage {
     this.prevButton = page.locator('.-previous .-btn');
 
     this.rowsSelect = page.locator('select[aria-label="rows per page"]');
+    //
+    this.table = page.getByRole('table');
   }
 
   // ===== NAVIGATION =====
