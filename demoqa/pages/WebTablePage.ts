@@ -43,7 +43,7 @@ export class WebTablesPage {
   }
 
   // ===== TABLE ROW HELPERS =====
-  getRow(text: string) {
+  getRow(text: string) : Locator {
     return this.page.locator('.rt-tr-group', { hasText: text });
     //return this.page.locator(this.firsNameInput, { hasText: text });
  
